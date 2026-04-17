@@ -103,8 +103,6 @@ CREATE TABLE participacion (
 	FOREIGN KEY (usuario_id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
---- Mensaje <(@.@)>
-
 CREATE TABLE mensaje (
 	id BIGSERIAL PRIMARY KEY,
 	participacion_id BIGINT NOT NULL,
@@ -131,7 +129,7 @@ CREATE TABLE memoria (
 );
 
 -- POOL DE PRUEBAS
--- QUE NO DWBERIA FUNCIONAR
+-- QUE NO DEBERÍA FUNCIONAR
 -- variacion con nombre
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy@ggitam.mx', 'ben');
