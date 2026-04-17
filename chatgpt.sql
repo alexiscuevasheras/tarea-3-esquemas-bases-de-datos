@@ -30,7 +30,7 @@ CREATE TABLE usuario (
 	contrasena VARCHAR(100) NOT NULL,
 
 	-- Restriccion: la contrasena no puede ser ni el nombre ni el apellido del usuario y no se puede repetir el mismo mail para dos usuarios
-	-- Se usa SHA256 sobre ambos lados con UPPER y TRIM para que la comparacion sea case-insensitive
+	--<(@.@)>
     CONSTRAINT unico_correo UNIQUE (correo),
 	CONSTRAINT contrasena_no_nombre CHECK (contrasena != SHA256(nombre::BYTEA)),
 	CONSTRAINT contrasena_no_apellido CHECK (contrasena != SHA256(apellido::BYTEA))
@@ -91,7 +91,7 @@ CREATE TABLE participacion (
 	rol VARCHAR(1) NOT NULL,
 
 
-	-- Restriccion: un usuario no puede repetirse en la misma conversacion
+	-- Restriccion: <(@.@)> un usuario no puede repetirse en la misma conversacion
     --Asegurarse de que el rol no es una cadena vacía
 	CONSTRAINT usuario_conversacion_unico UNIQUE(usuario_id, conversacion_id),
     CONSTRAINT rol_valido CHECK (rol != ''),
@@ -103,7 +103,7 @@ CREATE TABLE participacion (
 	FOREIGN KEY (usuario_id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
---- Mensaje
+--- Mensaje <(@.@)>
 
 CREATE TABLE mensaje (
 	id BIGSERIAL PRIMARY KEY,
@@ -175,4 +175,3 @@ VALUES ('Ben', 'Zimbron', 'benvoy12@ggitam.mx', 'logroBen');
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy13@ggitam.mx', '123zimbron');
--- hola  
