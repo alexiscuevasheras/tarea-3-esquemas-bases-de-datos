@@ -176,4 +176,4 @@ VALUES ('Ben', 'Zimbron', 'benvoy12@ggitam.mx', 'logroBen');
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy13@ggitam.mx', '123zimbron');
 
--- adios
+-- pene 
