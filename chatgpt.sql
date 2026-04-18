@@ -134,6 +134,8 @@ CREATE TABLE memoria (
 -- POOL DE PRUEBAS
 -- QUE NO DEBERÍA FUNCIONAR
 -- variacion con nombre
+--  Metemos TRIM para eliminar espacios en blanco al inicio o al final, ya que a veces los usuarios
+-- pueden poner espacios sin querer y eso no debería afectar la validación de la contraseña.
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy@ggitam.mx', SHA256(TRIM('ben')::bytea)::text);
 
@@ -142,9 +144,7 @@ VALUES ('Ben', 'Zimbron', 'benvoy2@ggitam.mx', SHA256(TRIM('BEN')::bytea)::text)
 
 
 -- Estos si deberían funcionar porque son combinaciones de mayusculas y minusculas,
--- pero no son exactamente iguales al nombre o apellido y son más seguras. Metemos TRIM 
--- para eliminar espacios en blanco al inicio o al final, ya que a veces los usuarios pueden 
--- poner espacios sin querer y eso no debería afectar la validación de la contraseña.
+-- pero no son exactamente iguales al nombre y son más seguras.
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy3@ggitam.mx', SHA256(TRIM(' BeN')::bytea)::text);
 
@@ -152,12 +152,16 @@ INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy4@ggitam.mx', SHA256(TRIM('bEn')::bytea)::text);
 
 
--- variacion con apellido
+-- variacion con apellido, aplicando lo mismo que con el nombre, metemos TRIM para eliminar
+-- espacios en blanco al inicio o al final.
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy5@ggitam.mx', SHA256(TRIM('zimbron ')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy6@ggitam.mx', SHA256(TRIM('ZIMBRON')::bytea)::text);
+
+-- Estos si deberían funcionar porque son combinaciones de mayusculas y minusculas,
+-- pero no son exactamente iguales als apellido y son más seguras.
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
 VALUES ('Ben', 'Zimbron', 'benvoy7@ggitam.mx', SHA256(TRIM('ZiMbRoN ')::bytea)::text);
