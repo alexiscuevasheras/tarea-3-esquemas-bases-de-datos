@@ -30,10 +30,13 @@ CREATE TABLE usuario (
 	contrasena VARCHAR(100) NOT NULL,
 
 	-- Restriccion: la contrasena no puede ser ni el nombre ni el apellido del usuario y no se puede repetir el mismo mail para dos usuarios
-	--<(@.@)>
     CONSTRAINT unico_correo UNIQUE (correo),
-	CONSTRAINT contrasena_no_nombre CHECK (contrasena != SHA256(nombre::BYTEA)),
-	CONSTRAINT contrasena_no_apellido CHECK (contrasena != SHA256(apellido::BYTEA))
+	CONSTRAINT contrasena_no_nombre CHECK (contrasena != SHA256(TRIM(nombre)::bytea)::text),
+	CONSTRAINT contrasena_no_apellido CHECK (contrasena != SHA256(TRIM(apellido)::bytea)::text),
+	CONSTRAINT contrasena_no_nombre_mayus CHECK (contrasena != SHA256(UPPER(TRIM(nombre))::bytea)::text),
+	CONSTRAINT contrasena_no_apellido_mayus CHECK (contrasena != SHA256(UPPER(TRIM(apellido))::bytea)::text),
+	CONSTRAINT contrasena_no_nombre_minus CHECK (contrasena != SHA256(LOWER(TRIM(nombre))::bytea)::text),
+	CONSTRAINT contrasena_no_apellido_minus CHECK (contrasena != SHA256(LOWER(TRIM(apellido))::bytea)::text)
 );
 
 --- Proyecto
@@ -132,44 +135,44 @@ CREATE TABLE memoria (
 -- QUE NO DEBERÍA FUNCIONAR
 -- variacion con nombre
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy@ggitam.mx', 'ben');
+VALUES ('Ben', 'Zimbron', 'benvoy@ggitam.mx', SHA256(UPPER(TRIM('ben'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy2@ggitam.mx', 'BEN');
+VALUES ('Ben', 'Zimbron', 'benvoy2@ggitam.mx', SHA256(UPPER(TRIM('BEN'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy3@ggitam.mx', 'BeN');
+VALUES ('Ben', 'Zimbron', 'benvoy3@ggitam.mx', SHA256(UPPER(TRIM('BeN'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy4@ggitam.mx', 'bEn');
+VALUES ('Ben', 'Zimbron', 'benvoy4@ggitam.mx', SHA256(UPPER(TRIM('bEn'))::bytea)::text);
 
 
 -- variacion con apellido
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy5@ggitam.mx', 'zimbron');
+VALUES ('Ben', 'Zimbron', 'benvoy5@ggitam.mx', SHA256(UPPER(TRIM('zimbron'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy6@ggitam.mx', 'ZIMBRON');
+VALUES ('Ben', 'Zimbron', 'benvoy6@ggitam.mx', SHA256(UPPER(TRIM('ZIMBRON'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy7@ggitam.mx', 'ZiMbRoN');
+VALUES ('Ben', 'Zimbron', 'benvoy7@ggitam.mx', SHA256(UPPER(TRIM('ZiMbRoN'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy8@ggitam.mx', 'zImBrOn');
+VALUES ('Ben', 'Zimbron', 'benvoy8@ggitam.mx', SHA256(UPPER(TRIM('zImBrOn'))::bytea)::text);
 
 
 -- casos validos
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy9@ggitam.mx', 'maslogro');
+VALUES ('Ben', 'Zimbron', 'benvoy9@ggitam.mx', SHA256(UPPER(TRIM('maslogro'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy10@ggitam.mx', 'masLogro');
+VALUES ('Ben', 'Zimbron', 'benvoy10@ggitam.mx', SHA256(UPPER(TRIM('masLogro'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy11@ggitam.mx', 'MasLogro123');
+VALUES ('Ben', 'Zimbron', 'benvoy11@ggitam.mx', SHA256(UPPER(TRIM('MasLogro123'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy12@ggitam.mx', 'logroBen');
+VALUES ('Ben', 'Zimbron', 'benvoy12@ggitam.mx', SHA256(UPPER(TRIM('logroBen'))::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy13@ggitam.mx', '123zimbron');
+VALUES ('Ben', 'Zimbron', 'benvoy13@ggitam.mx', SHA256(UPPER(TRIM('123zimbron'))::bytea)::text);
