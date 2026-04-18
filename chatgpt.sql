@@ -135,44 +135,49 @@ CREATE TABLE memoria (
 -- QUE NO DEBERÍA FUNCIONAR
 -- variacion con nombre
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy@ggitam.mx', SHA256(UPPER(TRIM('ben'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy@ggitam.mx', SHA256(TRIM('ben')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy2@ggitam.mx', SHA256(UPPER(TRIM('BEN'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy2@ggitam.mx', SHA256(TRIM('BEN')::bytea)::text);
+
+
+-- Estos si deberían funcionar porque son combinaciones de mayusculas y minusculas,
+-- pero no son exactamente iguales al nombre o apellido y son más seguras. Metemos TRIM 
+-- para eliminar espacios en blanco al inicio o al final, ya que a veces los usuarios pueden 
+-- poner espacios sin querer y eso no debería afectar la validación de la contraseña.
+INSERT INTO usuario (nombre, apellido, correo, contrasena)
+VALUES ('Ben', 'Zimbron', 'benvoy3@ggitam.mx', SHA256(TRIM(' BeN')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy3@ggitam.mx', SHA256(UPPER(TRIM('BeN'))::bytea)::text);
-
-INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy4@ggitam.mx', SHA256(UPPER(TRIM('bEn'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy4@ggitam.mx', SHA256(TRIM('bEn')::bytea)::text);
 
 
 -- variacion con apellido
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy5@ggitam.mx', SHA256(UPPER(TRIM('zimbron'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy5@ggitam.mx', SHA256(TRIM('zimbron ')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy6@ggitam.mx', SHA256(UPPER(TRIM('ZIMBRON'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy6@ggitam.mx', SHA256(TRIM('ZIMBRON')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy7@ggitam.mx', SHA256(UPPER(TRIM('ZiMbRoN'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy7@ggitam.mx', SHA256(TRIM('ZiMbRoN ')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy8@ggitam.mx', SHA256(UPPER(TRIM('zImBrOn'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy8@ggitam.mx', SHA256(TRIM('zImBrOn')::bytea)::text);
 
 
 -- casos validos
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy9@ggitam.mx', SHA256(UPPER(TRIM('maslogro'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy9@ggitam.mx', SHA256(TRIM(' maslogro')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy10@ggitam.mx', SHA256(UPPER(TRIM('masLogro'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy10@ggitam.mx', SHA256(TRIM('masLogro')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy11@ggitam.mx', SHA256(UPPER(TRIM('MasLogro123'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy11@ggitam.mx', SHA256(TRIM('MasLogro123')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy12@ggitam.mx', SHA256(UPPER(TRIM('logroBen'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy12@ggitam.mx', SHA256(TRIM('logroBen ')::bytea)::text);
 
 INSERT INTO usuario (nombre, apellido, correo, contrasena)
-VALUES ('Ben', 'Zimbron', 'benvoy13@ggitam.mx', SHA256(UPPER(TRIM('123zimbron'))::bytea)::text);
+VALUES ('Ben', 'Zimbron', 'benvoy13@ggitam.mx', SHA256(TRIM('123zimbron')::bytea)::text);
